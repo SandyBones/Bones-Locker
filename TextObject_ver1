@@ -1,0 +1,108 @@
+<html>
+<head>
+<Title>
+Digital Textuality
+</title>
+
+<script>
+
+function swap(a)
+{
+var temp=[" "];                  //array to store characters with special characters
+var i=0;                         //index for first array
+var j=0;                       //index for second array 
+while(i<a.length)
+{
+if((a.charCodeAt(i)>=65 && a.charCodeAt(i)<=90) || (a.charCodeAt(i)>=97)&&(a.charCodeAt(i)<=122)) //Checking for ascii values
+{
+temp[j]=a[i];
+i=i+1;
+j=j+1;
+console.log("alphabet");
+}
+else                                           //if not an alphabet
+{
+console.log("not an alphabet");
+i=i+1;
+j=j+1;
+if(i<a.length)                            //if not passed end of string
+{
+temp[j-1]=a[i-1]+a[i];                  //store special character slot with special character as well as alphabet after
+}
+else                                          //else store special character with previous character slot
+{
+temp[j-2]+=a[i-1];
+}
+i=i+1;
+
+}
+console.log(temp);
+}
+
+
+var len = temp.length-1;                                  //variable used in for loop
+console.log(len);
+var o = ""; 
+o = o+temp[0];                                            //storing first element in result string
+console.log(o[0]);
+for(i= len-1; i>0;i--)
+{
+console.log(a.charCodeAt(i));
+ 
+o+= temp[i];                       //writing to string from both ways. If alphabet, must be reversed in position
+
+console.log(o);
+}
+o+=temp[len];                                       //concatenating last element in result string
+console.log(o);
+return o;
+
+}
+
+function GetWord(str)
+{
+var res=" ";
+var res1= " ";
+var end= " ";
+if (str== "")
+{
+console.log("Please enter text in the textbox");
+alert("Please enter text in the textbox")
+}
+else
+{
+res=str.split(" ");
+console.log(res);
+for(var i=0;i<res.length;i++)
+{ 
+
+   res1=swap(res[i]); 
+  if (end== " ")                                 //assigning swapped word to final string
+   end=res1+" ";
+  else
+   end=end+res1+" ";
+res1=" ";
+
+console.log(end);
+}
+return end;                                             //final scrambled text returned
+}
+}
+
+function scramble(Frm)
+{
+var txt=Frm.textin.value;
+var res=GetWord(txt);
+Frm.textout.value=res;
+}
+</script>
+
+</head>
+<body>
+<Form name="F1">
+<textarea name="textin" rows=20 cols=50> </textarea> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+<textarea name="textout" rows=20 cols=50> </textarea><br/><br/>
+<input type="button" name="Scramble" value="Scramble" onClick="scramble(this.form)"/> 
+<br/>
+</body>
+</html>
